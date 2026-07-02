@@ -126,3 +126,56 @@ status     VARCHAR(20)
   ##Delete Notification
 
   DELETE FROM notifications WHERE id=1;
+
+
+
+** Stage - 3 **
+
+##Query Analysis
+
+The query is correct becase it gets all unread notifications for a student
+
+The query becomes slow because the database contains many students and notifications
+
+##Solution
+
+- create an index on studentID,isRead and createdAt
+- use pagination to load notifications is small batches
+- Avoid Creating index on evry column because it uses more storage and slow insert and update operations
+
+##SQL Query
+
+SELECT * FROM notifications WHERE studentID=123 AD isRead = false ORDER BY createdAt ASC;
+
+##Placement Notification in last 7 days
+
+SELECT * FROM notifications WHERE notificationType ='Placement' NAD createdAt >=NOW()-INTERVAL 7 DAY;
+
+#stage 4
+
+**To Improve performance:
+- use pagination to load only  few notifications at a time
+- store frequently used data in cache
+- load noifications only when need 
+- use indexes for faser search
+
+**Advantges
+- Faster page loading 
+- Reduce database load
+- Better user experience
+- Faster notification retriveal
+
+##Trade-off
+
+-cache needs regular updates
+- pagination requires loading more data when user scrolls
+
+
+**Stage 5**
+
+#problem
+
+- sending notification one by one is slow
+- if emil sending fails ,some students will not recieve noifications
+- the whole process may stop if 
+
