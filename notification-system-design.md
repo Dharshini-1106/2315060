@@ -1,5 +1,7 @@
 # Notification System Design
 
+**stage 1 **
+
 1.Get Notifications
 
 GET/api/notifications
@@ -80,3 +82,47 @@ json{
     "status":"Unread"
 }
 
+
+** stage - 2 **
+
+##Databse
+
+I suggest using MySQL becaseit is easy to use and realiable and store the dat in structured format
+
+** Database Schema **
+
+Notification Table
+
+column   Data Type
+ID         INT
+title      VARCHAR(100)
+message    TEXT
+status     VARCHAR(20)
+
+## Problems when data increases
+  - more notification takes more storage
+  -searching becomes slower
+  - database performance may reduce
+
+  ##solution
+
+  - create index for faster for faser search
+  - Delete old notifications
+  - use pagination to load notifications in small batches
+
+  ## sql squries
+
+  ** Create notification**
+  INSERT INTO notifications(title,message,status)VALUES('Exam','Exam starts at 10 AM','Unread');
+
+  ##Get Notifications 
+
+  SELECT * FROM notifications;
+
+  ##Marks as read
+
+  UPDATE notifications set status='Read' where id=1;
+
+  ##Delete Notification
+
+  DELETE FROM notifications WHERE id=1;
